@@ -1,0 +1,35 @@
+<input type="hidden" name="{{{fullname}}}" id="{{{fullname}}}" value="1">
+<table class="table table-striped filter-showonce-items">
+    <thead class="thead-dark">
+    <tr>
+        <th class="c0">Delete</th>
+        <th class="c1">Id</th>
+        <th class="c2">Page</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#items}}
+        <tr>
+            <td class="c0"><input type="checkbox" name="{{{textid}}}" id="{{{textid}}}"></td>
+            <td class="c1">{{{textid}}}</td>
+            <td class="c2"><a href="{{{pageurl}}}" target="_blank">{{{pageurl}}}</a></td>
+        </tr>
+    {{/items}}
+    </tbody>
+</table>
+{{#js}}
+    require(['jquery', 'core/log'], function($, log) {
+        $('#adminsettings').on('submit', function() {
+            var $form = $('#adminsettings'),
+                $checked = $form.find('[type=checkbox]:checked'),
+                $hidden = $form.find('#{{{fullname}}}'),
+                boxes = [];
+            if ($checked.length) {
+                $checked.each(function() {
+                    boxes.push($(this).attr('id'));
+                });
+                $hidden.val(boxes.join());
+            }
+        });
+    });
+{{/js}}
