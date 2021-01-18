@@ -59,7 +59,7 @@ class filter_showonce_admin_setting_handle_items extends admin_setting {
      * @return true
      */
     public function get_setting() {
-        return $this->config_read($this->name);
+        return true;
     }
 
     /**
@@ -80,7 +80,6 @@ class filter_showonce_admin_setting_handle_items extends admin_setting {
      */
     public function write_setting($data) {
         util::db_delete_showonce_items($data);
-
         return '';
     }
 
